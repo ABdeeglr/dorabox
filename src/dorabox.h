@@ -1,5 +1,4 @@
-// #include "dora_supportc.c"
-#include "dora_test.c"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+int invoke_test(void);
+
+void die(const char *message);
+void doraprint(char *filename);
