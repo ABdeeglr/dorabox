@@ -13,13 +13,26 @@
 static char* relative_path = "~/Manual";
 
 //----------- Function Formulation ----------
-void die(const char* message); // 当遇到错误时结束任务
-int test_function(int argc, const char* argv[]); // 用于测试新的功能
-void response_to_incorrect_use(); // 解释这个程序的使用方式
-char *absolute_path(char* path);// 接收一个文件名,并将其翻译为位于 Manual 的地址
-int status_analysis(const char** command); // 根据命令行调用本程序时的输入，返回一个整数，这个整数将决定之后进行的任务。
-void format_print(const char* filename); // 打开 <filename> 并格式化输入其中的内容。
-void invoke_vim_to_create_manual(const char* filename); // 在 ~/Manual 下创建一个名为 <filename> 的新说明，并使用 vim 编辑.
+// 当遇到错误时结束任务
+void die(const char* message);
+
+// 用于测试新的功能
+int test_function(int argc, const char* argv[]);
+
+// 解释这个程序的使用方式
+void response_to_incorrect_use();
+
+// 接收一个文件名,并将其翻译为位于 Manual 的地址
+char *absolute_path(char* path);
+
+// 根据命令行调用本程序时的输入，返回一个整数，这个整数将决定之后进行的任务
+int status_analysis(const char** command);
+
+// 读取 <filename> 并格式化输出其中的内容
+void format_print(const char* filename);
+
+// 在 ~/Manual 下创建一个名为 <filename> 的新说明，并使用 vim 编辑
+void invoke_vim_to_create_manual(const char* filename);
 
 
 // ------- 程序入口 -------
@@ -27,7 +40,7 @@ int main(int argc, char const *argv[])
 {
     switch(status_analysis(argv)) {
     case 0:
-        test_function(argc, argv);
+        format_print(argv[1]);
         
     case 1:
         format_print(argv[1]);
@@ -127,7 +140,18 @@ int status_analysis(const char** command) {
 
 
 void format_print(const char* filename) {
-    int i = 0;
+    char* sample = "sample";
+
+    FILE *p_manual = fopen(sample, "r");
+
+        char word;
+        while((word = getc(p_manual)) != EOF) {
+            putchar(word);
+        }
+        if (fclose(p_manual) != 0) die("File close error!");
+    
+
+
 }
 
 void invoke_vim_to_create_manual(const char* filename) {
